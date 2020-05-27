@@ -9,7 +9,7 @@ struct vetSantiago{//santiago
 
 char mascota[20]; //producto
 char especie[20]; //precio
-char requirimiento[20]; //nventario
+int requirimiento; //nventario
 int total;
 struct vetSantiago* ptrSig;
 };
@@ -27,12 +27,12 @@ printf("¿Cual es la especie de tu mascota?\n");
 scanf("%s", &ptrNuevo->especie);
 
 printf("¿Cual es la edad del animal?\n");
-scanf("%s", &ptrNuevo->requirimiento);
+scanf("%d", &ptrNuevo->requirimiento);
 
 //AQUI VOY A TENER QUE METER LA RECURSIVIDAD PARA CALCULAR LOS PRECIOS
 printf("¿Cuanto fue el total de su compra?\n");
 requerimiento();
-printf("\nPOR FAVOR INGRESAR EL TOTAL DE LA CUENTA"); 
+printf("\nPOR FAVOR INGRESAR EL TOTAL DE LA CUENTA: "); 
 scanf("%d", &ptrNuevo->total);
 
 ptrNuevo->ptrSig = ptrA;
@@ -62,7 +62,7 @@ int i=1;
 		
 		printf("MASCOTA: %s \n",ptrActual->mascota);
 		printf("EPECIE: %s \n", ptrActual->especie);
-		printf("MOTIVO DE LA CONSULTA: %s \n", ptrActual->requirimiento);
+		printf("Edad: %d \n", ptrActual->requirimiento);
 		//tengo que meter recursividad aqui lol
 		printf("El total de la consulta es: %d \n", ptrActual->total);
 		
@@ -106,6 +106,8 @@ system("cls");
 			case 2:
 				system("cls");
 				ptrA=sacar(ptrA);
+				printf("SE HA ELIMINADO EL ELEMENTO:  \n");
+				system("pause");
 				system("cls");
 			break;
 			
@@ -188,7 +190,7 @@ int requerimiento(struct vetSantiago * total){
 					printf("SALIENDO DEL PEDIDO \n");
 				break;
 			}
-		} printf("Cuenta final: %d", totalPedido+1);
+		} printf("Cuenta final: %d", totalPedido);
 		
 	
     for (i=0; i<5; i++){
