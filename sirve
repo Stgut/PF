@@ -1,0 +1,234 @@
+
+#include <stdio.h>
+#include<stdlib.h>
+
+int i=0, j=0; 
+int pedido();
+
+struct vetSantiago{//santiago
+
+char mascota[20]; //producto
+char especie[20]; //precio
+char requirimiento[20]; //nventario
+int total;
+struct vetSantiago* ptrSig;
+};
+
+struct vetSantiago * insertar(struct vetSantiago * ptrA){
+struct vetSantiago * ptrNuevo;
+
+ptrNuevo=(struct vetSantiago *) malloc(sizeof(struct vetSantiago));
+
+printf ("¿Cual es el nombre de tu mascota?\n ");
+scanf ("%s", &ptrNuevo->mascota);
+
+
+printf("¿Cual es la especie de tu mascota?\n");
+scanf("%s", &ptrNuevo->especie);
+
+printf("¿Cual es la edad del animal?\n");
+scanf("%s", &ptrNuevo->requirimiento);
+
+//AQUI VOY A TENER QUE METER LA RECURSIVIDAD PARA CALCULAR LOS PRECIOS
+printf("¿Cuanto fue el total de su compra?\n");
+requerimiento();
+printf("\nPOR FAVOR INGRESAR EL TOTAL DE LA CUENTA"); 
+scanf("%d", &ptrNuevo->total);
+
+ptrNuevo->ptrSig = ptrA;
+ptrA = ptrNuevo;
+
+return ptrA;
+
+} 
+
+struct vetSantiago * sacar(struct vetSantiago * ptrA){
+
+struct vetSantiago * ptrActual;
+
+ptrActual=ptrA;
+ptrA=ptrA->ptrSig;
+free(ptrActual);
+
+return ptrA;
+}
+
+void mostrar(struct vetSantiago * ptrA){
+
+struct vetSantiago * ptrActual = ptrA;
+int i=1;
+	while (ptrActual) {
+		printf("-----RECAPITULANDO DATOS DE LA CONSULTA %d------\n", i);
+		
+		printf("MASCOTA: %s \n",ptrActual->mascota);
+		printf("EPECIE: %s \n", ptrActual->especie);
+		printf("MOTIVO DE LA CONSULTA: %s \n", ptrActual->requirimiento);
+		//tengo que meter recursividad aqui lol
+		printf("El total de la consulta es: %d \n", ptrActual->total);
+		
+		printf("-----------FINAL DE LA CONSULTA %d------------\n\n", i);
+		
+		ptrActual = ptrActual->ptrSig;
+		i++;
+	}
+}
+
+int main(){
+
+int i;
+int eleccion=1, password; 	
+struct vetSantiago * ptrA=NULL;
+
+printf("BIENVENIDO A LA VETERINARIA A 'VETSANTAIGO' PARA CONTINUAR POR FAVOR INGRESE LA CONTRASEÑA\n");   
+printf("Por favor ingresa una clave de cuatro digitos: ");
+scanf("%d", &password);
+system("cls");
+    
+    if(password<10000){
+		for ( i=0; i<10000; i++){
+        	if(i == password){
+            	printf("\n--FELICIDADES, HA ACCEDIDO POR MEDIO DE FUERZA BRUTA--\n", i);
+            	printf("-----------------Accediendo al programa----------------\n", i);
+       			system("pause");
+       			system("cls");
+       			
+       				while(eleccion !=0){
+		printf("SELECCIONE UNA OPCION:  \n");
+		printf(" 1.- Insertar \n 2.- Deshacer\n 3.- Mostrar\n 0.- Salir\n");
+		scanf("%d", &eleccion);
+		switch(eleccion){
+			case 1:
+				system("cls");
+				ptrA=insertar(ptrA);
+				system("cls");
+			break;
+				
+			case 2:
+				system("cls");
+				ptrA=sacar(ptrA);
+				system("cls");
+			break;
+			
+			case 3:
+				system("cls");
+				mostrar(ptrA);
+				system("pause");
+				system("cls");
+			break;
+			
+			default:
+				printf("Saliendo del programa...\n\n");
+			break;
+		}
+	}
+free(ptrA);
+printf("Fin de la ejecucion\n");
+return 0;
+}
+       			
+        	}
+		}
+	else
+        printf("\nPasword invalida, fuera del rango");
+}
+
+int requerimiento(struct vetSantiago * total){
+    
+	int cambioBillete[5] = {500, 200, 100, 50, 20};
+    int billete[5] = {0,0,0,0,0};
+    
+    int cambioMoneda[4] = {10, 5, 2, 1};
+    int monedas[4] = {0,0,0,0};
+    
+    int suma=0, bandera=0; 
+    
+    int respuesta, totalPedido, final;
+	
+	while(respuesta!=5){
+		printf("\n 1.-Estetica-----------------$105");
+		printf("\n 2.-Consluta medica----------$150");
+		printf("\n 3.-Esterelizacion-----------$327");
+		printf(" \n 4.-Albergue por 24hr------$100");
+		printf(" \n 5.-Salir-------------------$Gratis\n\n");
+		
+		printf("Por favor seleccione un plan: ");
+		scanf("%d", &respuesta);
+		system("cls");
+			switch(respuesta){
+			
+				case 1:
+					totalPedido=totalPedido+105;
+					printf("USTED HA SELECCIONADO: Estetica\n");
+					system("pause");
+					system("cls");
+				break;
+					
+				case 2:
+					totalPedido=totalPedido+150;
+					printf("USTED HA SELECCIONADO: Consulta Medica \n");
+					system("pause");
+					system("cls");
+				break;
+				
+				case 3:
+					totalPedido=totalPedido+327;
+					printf("USTED HA SELECCIONADO: Esterelizacion \n");
+					system("pause");
+					system("cls");
+				break;
+				
+				case 4:
+					totalPedido=totalPedido+100;
+					printf("USTED HA SELECCIONADO: 4.-Albergue por 24hr \n");
+					system("pause");
+					system("cls");
+				break;
+	
+				default:
+					printf("SALIENDO DEL PEDIDO \n");
+				break;
+			}
+		} printf("Cuenta final: %d", totalPedido+1);
+		
+	
+    for (i=0; i<5; i++){
+        bandera = 1;
+        while(bandera){
+            if (suma+cambioBillete[i]<=totalPedido){
+                suma = suma + cambioBillete[i];
+                billete[i]++;
+            }else{
+                bandera = 0;
+            }
+        }
+    }
+    
+    printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n BILLETES DE: \t500 \t\t200 \t\t100 \t\t50 \t\t20\n NECESITAS: ");
+    for (i=0; i<5; i++) {
+        printf("\t%d\t", billete[i]);
+    }printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n");
+    
+      for (i=0; i<4; i++){
+        bandera = 1;
+        while(bandera){
+            if (suma+cambioMoneda[i]<=totalPedido){
+                suma = suma + cambioMoneda[i];
+                monedas[i]++;
+            }else{
+                bandera = 0;
+            }
+        }
+    }
+    printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n MONEDA DE: \t10 \t\t5 \t\t2 \t\t1\n NECESITAS: ");
+    for (i=0; i<4; i++) {
+        printf("\t%d\t", monedas[i]);
+    }printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n");
+    
+    return totalPedido;
+}
+    
+
