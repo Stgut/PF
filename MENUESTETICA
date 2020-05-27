@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+int pedido();
+
+int main(){
+pedido();
+
+}
+
+int pedido(){
+	int respuesta, totalPedido;
+	
+	while(respuesta!=5){
+		printf("\n 1.-Estetica-----------------$105");
+		printf("\n 2.-Consluta medica----------$150");
+		printf("\n 3.-Esterelizacion-----------$327");
+		printf(" \n 4.-Albergue por 24hr------$100");
+		printf(" \n 5.-Salir-------------------$Gratis\n\n");
+		
+		printf("Por favor seleccione un plan: ");
+		scanf("%d", &respuesta);
+		system("cls");
+			switch(respuesta){
+			
+				case 1:
+					totalPedido=totalPedido+105;
+					printf("USTED HA SELECCIONADO: Estetica\n");
+					system("pause");
+					system("cls");
+				break;
+					
+				case 2:
+					totalPedido=totalPedido+150;
+					printf("USTED HA SELECCIONADO: Consulta Medica \n");
+					system("pause");
+					system("cls");
+				break;
+				
+				case 3:
+					totalPedido=totalPedido+327;
+					printf("USTED HA SELECCIONADO: Esterelizacion \n");
+					system("pause");
+					system("cls");
+				break;
+				
+				case 4:
+					totalPedido=totalPedido+100;
+					printf("USTED HA SELECCIONADO: 4.-Albergue por 24hr \n");
+					system("pause");
+					system("cls");
+				break;
+	
+				default:
+					printf("SALIENDO DEL PEDIDO \n");
+				break;
+			}
+		}printf("Cuenta final: %d", totalPedido);
+	
+}
