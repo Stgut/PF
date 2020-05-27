@@ -1,0 +1,53 @@
+#include <stdio.h>
+int i=0, j=0; 
+int main(){
+    int cambioBillete[5] = {500, 200, 100, 50, 20};
+    int billete[5] = {0,0,0,0,0};
+    
+    int cambioMoneda[4] = {10, 5, 2, 1};
+    int monedas[4] = {0,0,0,0};
+    
+    int total, suma=0, bandera=0; 
+    
+	printf("Su total del pedido fue: ");
+    scanf("%d", &total);
+    
+    for (i=0; i<5; i++){
+        bandera = 1;
+        while(bandera){
+            if (suma+cambioBillete[i]<=total){
+                suma = suma + cambioBillete[i];
+                billete[i]++;
+            }else{
+                bandera = 0;
+            }
+        }
+    }
+    
+    printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n BILLETES DE: \t500 \t\t200 \t\t100 \t\t50 \t\t20\n NECESITAS: ");
+    for (i=0; i<5; i++) {
+        printf("\t%d\t", billete[i]);
+    }printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n");
+    
+      for (i=0; i<4; i++){
+        bandera = 1;
+        while(bandera){
+            if (suma+cambioMoneda[i]<=total){
+                suma = suma + cambioMoneda[i];
+                monedas[i]++;
+            }else{
+                bandera = 0;
+            }
+        }
+    }
+    printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n MONEDA DE: \t10 \t\t5 \t\t2 \t\t1\n NECESITAS: ");
+    for (i=0; i<4; i++) {
+        printf("\t%d\t", monedas[i]);
+    }printf("\n-------------------------------------------------------------------------------------\n");
+    printf("\n");
+    
+    return 0;
+}
