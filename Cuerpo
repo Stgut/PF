@@ -1,0 +1,130 @@
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct vetSantiago{//santiago
+
+char mascota[20]; //producto
+char especie[20]; //precio
+char requirimiento[20]; //nventario
+int total;
+struct vetSantiago* ptrSig;
+};
+
+struct vetSantiago * insertar(struct vetSantiago * ptrA){
+struct vetSantiago * ptrNuevo;
+
+ptrNuevo=(struct vetSantiago *) malloc(sizeof(struct vetSantiago));
+
+printf ("¿Cual es el nombre de tu mascota?\n ");
+scanf ("%s", &ptrNuevo->mascota);
+
+
+printf("¿Cual es la especie de tu mascota?\n");
+scanf("%s", &ptrNuevo->especie);
+
+printf("¿Cual es el motivo de la consulta?\n");
+scanf("%s", &ptrNuevo->requirimiento);
+
+//AQUI VOY A TENER QUE METER LA RECURSIVIDAD PARA CALCULAR LOS PRECIOS
+printf("¿Cuanto fue el total de su compra?\n");
+scanf("%d", &ptrNuevo->total);
+
+ptrNuevo->ptrSig = ptrA;
+ptrA = ptrNuevo;
+
+return ptrA;
+
+} 
+
+struct vetSantiago * sacar(struct vetSantiago * ptrA){
+
+struct vetSantiago * ptrActual;
+
+ptrActual=ptrA;
+ptrA=ptrA->ptrSig;
+free(ptrActual);
+
+return ptrA;
+}
+
+void mostrar(struct vetSantiago * ptrA){
+
+struct vetSantiago * ptrActual = ptrA;
+int i=1;
+	while (ptrActual) {
+		printf("-----RECAPITULANDO DATOS DE LA CONSULTA %d------\n", i);
+		
+		printf("MASCOTA: %s \n",ptrActual->mascota);
+		printf("EPECIE: %s \n", ptrActual->especie);
+		printf("MOTIVO DE LA CONSULTA: %s \n", ptrActual->requirimiento);
+		//tengo que meter recursividad aqui lol
+		printf("El total de la consulta es: %d \n", ptrActual->total);
+		
+		printf("-----------FINAL DE LA CONSULTA %d------------\n\n", i);
+		
+		ptrActual = ptrActual->ptrSig;
+		i++;
+	}
+}
+
+int main(){
+
+int i;
+int eleccion=1, password; 	
+struct vetSantiago * ptrA=NULL;
+
+printf("BIENVENIDO A LA VETERINARIA A 'VETSANTAIGO' PARA CONTINUAR POR FAVOR INGRESE LA CONTRASEÑA\n");   
+printf("Por favor ingresa una clave de cuatro digitos: ");
+scanf("%d", &password);
+system("cls");
+    
+    if(password<10000){
+		for ( i=0; i<10000; i++){
+        	if(i == password){
+            	printf("\n--FELICIDADES, HA ACCEDIDO POR MEDIO DE FUERZA BRUTA--\n", i);
+            	printf("-----------------Accediendo al programa----------------\n", i);
+       			system("pause");
+       			system("cls");
+       			
+       				while(eleccion !=0){
+		printf("SELECCIONE UNA OPCION:  \n");
+		printf(" 1.- Insertar \n 2.- Deshacer\n 3.- Mostrar\n 0.- Salir\n");
+		scanf("%d", &eleccion);
+		switch(eleccion){
+			case 1:
+				system("cls");
+				ptrA=insertar(ptrA);
+				system("cls");
+			break;
+				
+			case 2:
+				system("cls");
+				ptrA=sacar(ptrA);
+				system("cls");
+			break;
+			
+			case 3:
+				system("cls");
+				mostrar(ptrA);
+				system("pause");
+				system("cls");
+			break;
+			
+			default:
+				printf("Saliendo del programa...\n\n");
+			break;
+		}
+	}
+free(ptrA);
+printf("Fin de la ejecucion\n");
+return 0;
+}
+       			
+        	}
+		}
+	else
+        printf("\nPasword invalida, fuera del rango");
+}
+    
+
