@@ -1,19 +1,23 @@
-
 #include <stdio.h>
 #include<stdlib.h>
 
+//DECIDI DECLARARLAS COMO GLOBALES YA QUE LAS USO EN TODAS MIS ESTRUCTURAS Y FUNCIONES
 int i=0, j=0; 
+
+//PROTOTIPO DE FUNCIONES:
 int pedido();
 
-struct vetSantiago{//santiago
+//ESTRUCTURA MADRE; LA LLAMO ASI PORQUE AQUI SE BASAN LAS DEMAS ESTRUCUTRAS PARA SU FUNCIONAMIENTO EN FUNCION DE UNA PILA
+struct vetSantiago{
 
-char mascota[20]; //producto
-char especie[20]; //precio
-int requirimiento; //nventario
-int total;
+char mascota[20]; 
+char especie[20];
+int edad;  
+int total; 
 struct vetSantiago* ptrSig;
 };
 
+//ESTRUCURA QUE TE PERMITE INSERTAR ELEMENTOS 
 struct vetSantiago * insertar(struct vetSantiago * ptrA){
 struct vetSantiago * ptrNuevo;
 
@@ -27,10 +31,10 @@ printf("¿Cual es la especie de tu mascota?\n");
 scanf("%s", &ptrNuevo->especie);
 
 printf("¿Cual es la edad del animal?\n");
-scanf("%d", &ptrNuevo->requirimiento);
+scanf("%d", &ptrNuevo->edad);
 
 //AQUI VOY A TENER QUE METER LA RECURSIVIDAD PARA CALCULAR LOS PRECIOS
-printf("¿Cuanto fue el total de su compra?\n");
+printf("¿Que desea hacer con su mascota?\n");
 requerimiento();
 printf("\nPOR FAVOR INGRESAR EL TOTAL DE LA CUENTA: "); 
 scanf("%d", &ptrNuevo->total);
@@ -42,6 +46,7 @@ return ptrA;
 
 } 
 
+//ESTRUCTURA QUE PERMITE ELIMINAR ELEMENTROS
 struct vetSantiago * sacar(struct vetSantiago * ptrA){
 
 struct vetSantiago * ptrActual;
@@ -53,6 +58,7 @@ free(ptrActual);
 return ptrA;
 }
 
+//ESTRUCTURA QUE PERMITE MOSTRAR ELEMENTOS 
 void mostrar(struct vetSantiago * ptrA){
 
 struct vetSantiago * ptrActual = ptrA;
@@ -62,7 +68,7 @@ int i=1;
 		
 		printf("MASCOTA: %s \n",ptrActual->mascota);
 		printf("EPECIE: %s \n", ptrActual->especie);
-		printf("Edad: %d \n", ptrActual->requirimiento);
+		printf("Edad: %d \n", ptrActual->edad);
 		//tengo que meter recursividad aqui lol
 		printf("El total de la consulta es: %d \n", ptrActual->total);
 		
@@ -73,14 +79,15 @@ int i=1;
 	}
 }
 
+//FUNCION MAIN DONDE SE LLAMAN A LAS PREVIAS ESTRUCTURAS Y FUNCIONES PARA LA EJECUCION OPTIMA DEL PROGRAMA
 int main(){
 
 int i;
 int eleccion=1, password; 	
 struct vetSantiago * ptrA=NULL;
 
-printf("BIENVENIDO A LA VETERINARIA A 'VETSANTAIGO' PARA CONTINUAR POR FAVOR INGRESE LA CONTRASEÑA\n");   
-printf("Por favor ingresa una clave de cuatro digitos: ");
+printf("BIENVENIDO A LA VETERINARIA A 'VETSANTAIGO' PARA CONTINUAR POR FAVOR INGRESE SU CLAVE DE ACCESO\n\n");   
+printf("\t\tPor favor ingresa una clave de cuatro digitos: ");
 scanf("%d", &password);
 system("cls");
     
@@ -94,7 +101,7 @@ system("cls");
        			
        				while(eleccion !=0){
 		printf("SELECCIONE UNA OPCION:  \n");
-		printf(" 1.- Insertar \n 2.- Deshacer\n 3.- Mostrar\n 0.- Salir\n");
+		printf(" 1.- Tomar registro \n 2.- Eliminar Registro\n 3.- Mostrar registro\n 0.- Salir\n\n");
 		scanf("%d", &eleccion);
 		switch(eleccion){
 			case 1:
@@ -117,7 +124,6 @@ system("cls");
 				system("pause");
 				system("cls");
 			break;
-			
 			default:
 				printf("Saliendo del programa...\n\n");
 			break;
@@ -131,9 +137,10 @@ return 0;
         	}
 		}
 	else
-        printf("\nPasword invalida, fuera del rango");
+        printf("\nUsted no ha cumplido con las caracteristicas de acceso");
 }
 
+//REQUERIMIENTO ES UNA FUNCION QUE TER PERMITE TENER LOS REQUERIMIENTOS NECESARIOAS PARA HACER LA CUENTA Y PAGO TOTAL DE LA CONSULTA
 int requerimiento(struct vetSantiago * total){
     
 	int cambioBillete[5] = {500, 200, 100, 50, 20};
@@ -232,5 +239,3 @@ int requerimiento(struct vetSantiago * total){
     
     return totalPedido;
 }
-    
-
